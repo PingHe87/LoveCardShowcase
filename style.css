@@ -1,12 +1,27 @@
 body {
   margin: 0;
   padding: 0;
-  background: #ffeef0;
   font-family: sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: radial-gradient(circle at top, #ffeef0, #ffccd5 60%, #f9a8b5);
+  overflow: hidden;
+  position: relative;
+}
+
+.bg-glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: #fff;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.2;
+  top: 20%;
+  left: 30%;
+  pointer-events: none;
 }
 
 .container {
@@ -34,7 +49,7 @@ img {
   perspective: 1000px;
   margin-top: 20px;
   user-select: none;
-  touch-action: none; /* 防止默认滑动行为 */
+  touch-action: none;
 }
 
 .card {
@@ -42,9 +57,9 @@ img {
   height: 420px;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.1s linear; /* 更快的刷新视觉 */
+  transition: transform 0.1s linear;
   cursor: grab;
-  user-select: none; /* 防止拖动时选中文字 */
+  user-select: none;
 }
 
 .card-face {
@@ -66,4 +81,51 @@ img {
 
 .hidden {
   display: none;
+}
+
+/* 打开卡包动画 */
+@keyframes openPack {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(0.5) rotate(-10deg);
+    opacity: 0;
+  }
+}
+
+.open-animation {
+  animation: openPack 1s ease forwards;
+}
+
+/* 🌸 花瓣飘落效果 */
+.petal {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-image: url("img/pink-cosmos.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.9;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  pointer-events: none;
+  z-index: 1;
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
 }

@@ -3,28 +3,122 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Love Card Showcase</title>
+    <title>Anniversary Card</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="bg-glow"></div>
+
+    <!-- 🌸 花瓣容器 -->
+    <div id="petals-container"></div>
+
     <div class="container">
       <div class="pack" id="pack">
-        <img src="img/placeholder-pack.png" alt="Card Pack" />
+        <img src="img/cardpack.png" alt="Card Pack" />
         <button id="openPackBtn">Open Pack</button>
       </div>
 
       <div class="card-container hidden" id="cardContainer">
         <div class="card" id="card">
           <div class="card-face front">
-            <img src="img/card-front.png" alt="Card Front" />
+            <img
+              src="img/card-front.png"
+              alt="Card Front"
+              width="300"
+              height="420"
+            />
           </div>
           <div class="card-face back">
-            <img src="img/card-back.png" alt="Card Back" />
+            <img
+              src="img/card-back.png"
+              alt="Card Back"
+              width="300"
+              height="420"
+            />
           </div>
         </div>
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+      const openBtn = document.getElementById("openPackBtn");
+      const packDiv = document.getElementById("pack");
+      const cardContainer = document.getElementById("cardContainer");
+      const card = document.getElementById("card");
+      const petalsContainer = document.getElementById("petals-container");
+
+      let isDragging = false;
+      let startX = 0;
+      let targetRotation = 0;
+      let currentRotation = 0;
+
+      // 🌸 创建花瓣函数
+      function createPetals(num = 15) {
+        for (let i = 0; i < num; i++) {
+          const petal = document.createElement("div");
+          petal.classList.add("petal");
+          petal.style.left = `${Math.random() * 100}%`;
+          petal.style.animationDuration = `${6 + Math.random() * 4}s`;
+          petal.style.animationDelay = `${Math.random() * 3}s`;
+          petalsContainer.appendChild(petal);
+        }
+      }
+
+      // 🌀 卡片旋转动画
+      function animate() {
+        currentRotation += (targetRotation - currentRotation) * 0.1;
+        card.style.transform = `rotateY(${currentRotation}deg)`;
+        requestAnimationFrame(animate);
+      }
+      animate();
+
+      // 🎁 打开卡包事件
+      openBtn.addEventListener("click", () => {
+        packDiv.classList.add("open-animation");
+        createPetals(15); // 🌸 加花瓣
+        setTimeout(() => {
+          packDiv.style.display = "none";
+          cardContainer.classList.remove("hidden");
+        }, 1000);
+      });
+
+      // 🖱️ 鼠标拖动
+      cardContainer.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        document.body.style.cursor = "grabbing";
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+        document.body.style.cursor = "default";
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - startX;
+        startX = e.clientX;
+        targetRotation += deltaX * 0.5;
+      });
+
+      // 📱 手机滑动
+      cardContainer.addEventListener(
+        "touchstart",
+        (e) => {
+          startX = e.touches[0].clientX;
+        },
+        { passive: true }
+      );
+
+      cardContainer.addEventListener(
+        "touchmove",
+        (e) => {
+          const deltaX = e.touches[0].clientX - startX;
+          startX = e.touches[0].clientX;
+          targetRotation += deltaX * 0.5;
+        },
+        { passive: true }
+      );
+    </script>
   </body>
 </html>
