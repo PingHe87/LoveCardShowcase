@@ -2,36 +2,11 @@ const openBtn = document.getElementById("openPackBtn");
 const packDiv = document.getElementById("pack");
 const cardContainer = document.getElementById("cardContainer");
 const card = document.getElementById("card");
-const petalsContainer = document.getElementById("petals-container");
 
 let isDragging = false;
 let startX = 0;
 let targetRotation = 0;
 let currentRotation = 0;
-
-// 🌸 创建花瓣函数
-function createPetals(num = 20) {
-  for (let i = 0; i < num; i++) {
-    const petal = document.createElement("div");
-    petal.classList.add("petal");
-
-    // 横向位置 & 初始纵向位置（屏幕上方之外）
-    petal.style.left = `${Math.random() * 100}%`;
-    const initialTop = Math.floor(Math.random() * -120) - 80; // -80 ~ -200px
-    petal.style.top = `${initialTop}px`;
-
-    // 动画参数
-    petal.style.animationDuration = `${6 + Math.random() * 3}s`;
-    petal.style.animationDelay = `${Math.random() * 3}s`;
-
-    petalsContainer.appendChild(petal);
-  }
-}
-
-// ✅ 页面加载时生成花瓣
-window.addEventListener("DOMContentLoaded", () => {
-  createPetals(20);
-});
 
 // 🎴 卡片旋转动画
 function animate() {
@@ -44,10 +19,6 @@ animate();
 // 🎁 打开卡包动画
 openBtn.addEventListener("click", () => {
   packDiv.classList.add("open-animation");
-
-  // 再追加几片花瓣
-  createPetals(10);
-
   setTimeout(() => {
     packDiv.style.display = "none";
     cardContainer.classList.remove("hidden");
@@ -72,6 +43,33 @@ document.addEventListener("mousemove", (e) => {
   startX = e.clientX;
   targetRotation += deltaX * 0.5;
 });
+// 🌟 自动生成动态颗粒
+const particleContainer = document.querySelector(".particles");
+
+function createParticles(num = 30) {
+  for (let i = 0; i < num; i++) {
+    const p = document.createElement("div");
+    p.classList.add("particle");
+
+    // 随机位置
+    p.style.left = `${Math.random() * 100}%`;
+    p.style.top = `${Math.random() * 100}%`;
+
+    // 不同动画延迟 & 时间
+    p.style.animationDuration = `${6 + Math.random() * 6}s`;
+    p.style.animationDelay = `${Math.random() * 5}s`;
+
+    // 随机大小
+    const size = Math.random() * 6 + 4;
+    p.style.width = `${size}px`;
+    p.style.height = `${size}px`;
+
+    particleContainer.appendChild(p);
+  }
+}
+
+// 初始化粒子
+createParticles(30);
 
 // 📱 手机滑动旋转
 cardContainer.addEventListener(
