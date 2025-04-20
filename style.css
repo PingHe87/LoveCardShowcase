@@ -123,6 +123,38 @@ img {
     opacity: 0.6;
   }
 }
+#openPackBtn {
+  margin-top: 15px;
+  padding: 14px 28px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #ff80ab, #ff4081);
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+
+#openPackBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(255, 105, 180, 0.6);
+}
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+#openPackBtn {
+  animation: pulse 3s infinite ease-in-out;
+}
 
 /* 打开卡包动画 */
 @keyframes openPack {
@@ -152,4 +184,18 @@ img {
   100% {
     background-position: 0% 50%;
   }
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) rotateY(180deg) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) rotateY(0deg) scale(1);
+  }
+}
+
+.card-container.show-animation {
+  animation: fadeInUp 2s ease-out forwards;
 }
