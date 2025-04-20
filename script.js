@@ -23,6 +23,7 @@ openBtn.addEventListener("click", () => {
     packDiv.style.display = "none";
     cardContainer.classList.remove("hidden");
     cardContainer.classList.add("show-animation");
+    card.classList.add("glow");
   }, 2000);
 });
 

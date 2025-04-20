@@ -1,3 +1,6 @@
+/* ---------------------
+🌸 1. 页面基础样式
+---------------------- */
 body {
   margin: 0;
   padding: 0;
@@ -8,7 +11,7 @@ body {
   height: 100vh;
   background: linear-gradient(-45deg, #ffeef0, #ffd5ec, #ffb6c1, #f9a8b5);
   background-size: 400% 400%;
-  animation: gradientFlow 9s ease infinite;
+  animation: gradientFlow 20s ease infinite;
   overflow: hidden;
   position: relative;
 }
@@ -37,14 +40,32 @@ img {
   margin: 0 auto;
 }
 
+/* ---------------------
+✨ 2. 卡包与卡片
+---------------------- */
 .pack img {
   width: 200px;
 }
 
 #openPackBtn {
-  margin-top: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
+  margin-top: 15px;
+  padding: 14px 28px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #ff80ab, #ff4081);
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  animation: pulse 3s infinite ease-in-out;
+}
+
+#openPackBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(255, 105, 180, 0.6);
 }
 
 .card-container {
@@ -52,6 +73,10 @@ img {
   margin-top: 20px;
   user-select: none;
   touch-action: none;
+}
+
+.card-container.show-animation {
+  animation: fadeInUp 2s ease-out forwards;
 }
 
 .card {
@@ -62,6 +87,12 @@ img {
   transition: transform 0.1s linear;
   cursor: grab;
   user-select: none;
+}
+
+.card.glow {
+  animation: glowPulse 3s ease-in-out infinite;
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.6), 0 0 32px rgba(255, 255, 255, 0.4),
+    0 0 48px rgba(255, 255, 255, 0.3);
 }
 
 .card-face {
@@ -86,7 +117,9 @@ img {
   display: none;
 }
 
-/* 🌟 动态颗粒容器 */
+/* ---------------------
+🌠 3. 动态粒子背景
+---------------------- */
 .particles {
   position: absolute;
   width: 100%;
@@ -96,7 +129,6 @@ img {
   pointer-events: none;
 }
 
-/* 🌟 单个颗粒的样式 */
 .particle {
   position: absolute;
   width: 8px;
@@ -108,55 +140,21 @@ img {
   filter: blur(1px);
 }
 
-/* 🌟 飘浮动画 */
-@keyframes float {
+/* ---------------------
+🎬 4. 动画效果
+---------------------- */
+@keyframes gradientFlow {
   0% {
-    transform: translateY(0) scale(1);
-    opacity: 0.6;
+    background-position: 0% 50%;
   }
   50% {
-    transform: translateY(-20px) scale(1.3);
-    opacity: 1;
+    background-position: 100% 50%;
   }
   100% {
-    transform: translateY(0) scale(1);
-    opacity: 0.6;
-  }
-}
-#openPackBtn {
-  margin-top: 15px;
-  padding: 14px 28px;
-  font-size: 18px;
-  font-weight: bold;
-  color: white;
-  background: linear-gradient(135deg, #ff80ab, #ff4081);
-  border: none;
-  border-radius: 30px;
-  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.4);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  letter-spacing: 1px;
-}
-
-#openPackBtn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(255, 105, 180, 0.6);
-}
-@keyframes pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
+    background-position: 0% 50%;
   }
 }
 
-#openPackBtn {
-  animation: pulse 3s infinite ease-in-out;
-}
-
-/* 打开卡包动画 */
 @keyframes openPack {
   0% {
     transform: scale(1) rotate(0deg);
@@ -174,17 +172,7 @@ img {
 .open-animation {
   animation: openPack 1s ease forwards;
 }
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
+
 @keyframes fadeInUp {
   0% {
     opacity: 0;
@@ -192,10 +180,43 @@ img {
   }
   100% {
     opacity: 1;
-    transform: translateY(0px) rotateY(0deg) scale(1);
+    transform: translateY(0) rotateY(0deg) scale(1);
   }
 }
 
-.card-container.show-animation {
-  animation: fadeInUp 2s ease-out forwards;
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.3);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 16px rgba(255, 215, 0, 0.6),
+      0 0 32px rgba(255, 255, 255, 0.4), 0 0 48px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 32px rgba(255, 255, 255, 0.9),
+      0 0 64px rgba(255, 223, 0, 0.7), 0 0 80px rgba(255, 255, 150, 0.5);
+  }
 }
