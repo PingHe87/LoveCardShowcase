@@ -110,7 +110,7 @@ img {
   background-image: url("img/pink-cosmos.png");
   background-size: contain;
   background-repeat: no-repeat;
-  opacity: 0.9;
+  opacity: 0.5;
   animation-name: fall;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
