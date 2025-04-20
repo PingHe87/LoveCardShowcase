@@ -1,0 +1,69 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #ffeef0;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.pack img {
+  width: 200px;
+}
+
+#openPackBtn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.card-container {
+  perspective: 1000px;
+  margin-top: 20px;
+  user-select: none;
+  touch-action: none; /* 防止默认滑动行为 */
+}
+
+.card {
+  width: 300px;
+  height: 420px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.1s linear; /* 更快的刷新视觉 */
+  cursor: grab;
+  user-select: none; /* 防止拖动时选中文字 */
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.front {
+  z-index: 2;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.hidden {
+  display: none;
+}

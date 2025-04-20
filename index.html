@@ -2,12 +2,29 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Love Card Showcase</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>❤️ Our 1st Anniversary ❤️</h1>
-    <img src="card-front.png" alt="Anniversary Card" width="300" />
+    <div class="container">
+      <div class="pack" id="pack">
+        <img src="img/placeholder-pack.png" alt="Card Pack" />
+        <button id="openPackBtn">Open Pack</button>
+      </div>
+
+      <div class="card-container hidden" id="cardContainer">
+        <div class="card" id="card">
+          <div class="card-face front">
+            <img src="img/card-front.png" alt="Card Front" />
+          </div>
+          <div class="card-face back">
+            <img src="img/card-back.png" alt="Card Back" />
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>
