@@ -2,6 +2,7 @@ const openBtn = document.getElementById("openPackBtn");
 const packDiv = document.getElementById("pack");
 const cardContainer = document.getElementById("cardContainer");
 const card = document.getElementById("card");
+const bgm = document.getElementById("bgm");
 
 let isDragging = false;
 let startX = 0;
@@ -19,6 +20,11 @@ animate();
 // 🎁 打开卡包动画
 openBtn.addEventListener("click", () => {
   packDiv.classList.add("open-animation");
+
+  // ✅ 播放背景音乐
+  bgm.volume = 0.5; // 调整音量（0 ~ 1）
+  bgm.play();
+
   setTimeout(() => {
     packDiv.style.display = "none";
     cardContainer.classList.remove("hidden");
